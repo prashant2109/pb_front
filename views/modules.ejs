@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TAS Data Studio</title>
+    <link rel="shortcut icon" href="src/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/ui-grid.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/ag-grid.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/mdb.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/modules.css"/>    
+    <link rel="stylesheet" type="text/css" href="src/css/feather.css"/>
+
+    <script type="text/javascript" src="src/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="src/libs/popper.min.js"></script>
+    <script type="text/javascript" src="src/libs/moment.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="src/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/libs/ui-grid.min.js"></script>
+    <script type="text/javascript" src="src/libs/ag-grid-community.min.js"></script>
+    <script type="text/javascript" src="src/libs/mdb.min.js" defer></script>
+    <script type="text/javascript" src='src/libs/ui-bootstrap-tpls.js'></script>
+    <script type="text/javascript" src="src/js/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src="src/js/common/reference_module.js"></script>
+    <script type="text/javascript" src="src/js/upload.js"></script>
+    <script type="text/javascript" src="src/js/source_setup.js"></script>
+    <script type="text/javascript" src="src/js/schedule_module.js"></script>
+    <script type="text/javascript" src="src/js/validation_module.js"></script>
+
+    <script type="text/javascript" src="src/js/modules/information_units.js"></script>
+    <script type="text/javascript" src="src/js/modules/db_rca_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/output_viewer.js"></script>
+    <script type="text/javascript" src="src/js/modules/enterprise_module.js"></script>
+    
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="src/js/common/app.js"></script>
+    <script type="text/javascript" src="src/js/common/service.js"></script>
+    <script type="text/javascript" src="src/js/common/factory.js"></script>
+    <script type="text/javascript" src="src/js/common/filter.js"></script>
+    <script type="text/javascript" src="src/js/menu_list.js"></script>
+    <script type="text/javascript" src="src/js/icons_list.js"></script>
+    <script type="text/javascript" src="src/js/modules.js"></script>
+
+</head>
+<body ng-app="app" ng-controller="ModulesCntrl" id="body_wrapper" style="display: none;">
+<div class="header_top">
+    <div class="container-full">
+	    <div class="pull-left logo_div" ng-class="{'closed-sidebarr': !side_menu_active}">
+		    <svg width="30" height="28">
+                	<rect ry="2" rx="2" height="24" width="26" x="0" y="0" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+                	<rect x="7" y="6" rx="0" ry="0" width="12" height="12" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="10" y="9" rx="0" ry="0" width="6" height="6" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+                	<rect x="11.5" y="10.5" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="3" y="6" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="7" y="3" rx="0" ry="0" width="3" height="4" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="20" y="15" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="16" y="18" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+		    </svg>
+		    <span class="logo_title"><b>TAS</b> Data Studio</span>
+	    </div>	   
+	    <div class="pull-left hamburger_full_box">
+                    <div class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" ng-click="side_menu_func()"> <!--ng-class="{'is-active': !side_menu_active}"-->
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </div>
+            </div>
+	    <div class="hdr_title_sec">
+			Modules Configuration
+	    </div>
+	    <div class="pull-right">
+	    	<div class="header-icon waves-effect pull-left"><i class="fa fa-user" aria-hidden="true"></i><span class="text-dark" id="user_id"><%- user_id %></span></div>
+	    	<a href="/document" class="header-icon waves-effect pull-left"><i class="fa fa-home" aria-hidden="true"></i></a>
+	    	<div class="header-icon waves-effect pull-left" ng-click="logout_func()"><i class="fa fa-sign-out red-text" aria-hidden="true"></i></div>
+	    </div>
+    </div>
+</div>
+<div class="ts_box">
+	<div class="ts_box_menu app-sidebar">
+		<div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu metismenu">
+                            <li class="app-sidebar__heading">List of Modules</li>
+			</ul>
+			<div class="inpt_src_sec"><input type="text" class="form-control sl_cip" ng-model="inp_m_fltr" style="width: 100%;"></div>
+			<ul class="vertical-nav-menu metismenu" style="overflow: auto;height: calc(100% - 80px);" id="drg_sec">
+                            <li class="mtr_card__list_group_item waves-effect" ng-repeat="m in m_list | filter: inp_m_fltr" ng-click="module_click_func(m)" ng-class="{active: sl_c_dic['k'] == m['k']}">
+				<div class="mtr_card__indicator" ng-class="{'bg-success': m['s'] == 'Y', 'bg-danger': m['s'] == 'N'}"></div>
+				<div class="mtr_card__widget_content" ng-class="{clgbbi_handle_act: s_tab == 'config'}">
+					<i class="fa {{m['fi']}} metismenu-icon" aria-hidden="true"></i>
+					<div class="mtr_card__widget_heading" ng-bind-html="m['n'] | trusted1" title="{{m['n']}}"></div>
+					<div class="mtr_card__widget_subheading" ng-bind-html="m['f_n'] | trusted1" title="{{m['f_n']}}"></div>
+					<div class="clgbbi" ng-if="m['d_v'] == 'Y'" title="Doc View"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+				</div>
+				<div class="clgbbi_handle" ng-if="s_tab == 'config'">:::</div>
+			    </li>
+                        </ul>	
+		</div>
+	</div>
+	<div class="mtr_main" ng-class="{'closed-sidebar': !side_menu_active}">
+		<div class="mtr_card mtr_main__sb_sec">
+			<div class="mtr_card__header" style="height: 40px;">
+				<div class="mtr_card__tab_f">
+					<div class="mtr_card__tab" ng-class="{active: s_tab == 'module'}" ng-click="tab_change_func('module')">Module</div>
+					<div class="mtr_card__tab" ng-class="{active: s_tab == 'config'}" ng-click="tab_change_func('config')">Configuration</div>
+				</div>	
+				<div class="btn btn-success btn-sm pull-right menu_sec_btn waves-effect" ng-click="module_save_func()" ng-if="s_tab == 'module'">Save</div>
+				<div class="btn btn-sm pull-right btn_nrml_sec waves-effect" ng-click="new_module_func()" ng-if="s_tab == 'module'" ng-class="{active_k: !module_edit_flg}">New Module</div>
+			</div>
+			<div class="mtr_card__body" ng-if="s_tab == 'module'">
+				<div class="clg_p">
+					<div class="clgh_p">Module Information</div>
+					<div class="clgb_p">
+						<div class="clgbb_p">
+							<code class="clgbbn_p">Name</code>
+							<div class="clgbbt_p">
+								<input type="text" ng-model="sl_c_dic['n']" placeholder="Name" class="form-control sl_cip" ng-class="{disabled: edit_c_flg}">
+							</div>
+						</div>
+						<div class="clgbb_p">
+							<code class="clgbbn_p">Full Name</code>
+							<div class="clgbbt_p">
+								<input type="text" ng-model="sl_c_dic['f_n']" placeholder="Full Name" class="form-control sl_cip">
+							</div>
+						</div>
+						<div class="clgbb_p">
+							<code class="clgbbn_p">Key</code>
+							<div class="clgbbt_p">
+								<input type="text" ng-model="sl_c_dic['k']" placeholder="Key" class="form-control sl_cip" ng-class="{disabled: module_edit_flg}">
+							</div>
+						</div>
+						<div class="clgbb_p">
+							<code class="clgbbn_p">Icon
+							<span class="pull-right fnt_icn_srch waves-effect" ng-click="show_all_icons_func()" title="Search Icons in List"><i class="fa fa-search" aria-hidden="true"></i></span>
+							</code>
+							<div class="clgbbt_p">
+								<input type="text" ng-model="sl_c_dic['fi']" placeholder="Icon" class="form-control sl_cip">
+							</div>
+						</div>
+						 <div class="clgbb_p">
+							<code class="clgbbn_p">Doc View</code>
+							<div class="clgbbt_p">
+								<div class="demo_check" ng-class="{'active': sl_c_dic['d_v']== 'Y'}" ng-click="checked_option()"></div>										    </div>
+						</div>
+						<div class="clgbb_p" ng-if="module_edit_flg">
+							<code class="clgbbn_p">Status</code>
+							<div class="clgbbt_p">
+								<div class="clgbbi_p" ng-class="{'in_act': sl_c_dic['s'] == 'N'}" ng-click="active_change_func()"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="fnt_icn_list" ng-if="show_icon_flg">
+				<div class="fnt_icn_list_hdr">
+					<div class="mtr_card__title">Icons :</div>
+					<input type="text" class="form-control filter_input" placeholder="Search Icons" ng-model="icon_filter">	
+					<div class="fnt_icn_list_cls pull-right waves-effect" ng-click="cls_fnt_pop_func()">&times;</div>	
+				</div>
+				<div class="fnt_icn_list_btm">
+					<div class="fnt_icns waves-effect" ng-repeat="icn in font_list | filter:icon_filter track by $index" ng-click="slct_font_func(icn)" ng-class="{active: sl_c_dic['fi'] == icn}">
+						<div class="fnt_icn_bx">
+							 <i class="fa {{icn}} metismenu-icon" aria-hidden="true"></i>
+						</div>
+						<div class="fnt_icn_txt">
+								{{icn}}
+						</div>
+					</div>	
+				</div>	
+			</div>
+			<div class="mtr_card__body" ng-if="s_tab == 'config'" style="min-height: calc(100% - 40px);">
+                                <div class="clg_p">
+                                        <div class="clgh_p">Menu Configuration</div>
+                                        <div class="clgb_p" drop="true" style="min-height: calc(100% - 50px);" id="drop_div_id">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ <% include common_views %>
+
+</body>
+</html>

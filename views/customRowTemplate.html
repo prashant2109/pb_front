@@ -1,0 +1,29 @@
+<div class="custom_row">
+  <div ng-if="row.entity.da > 0 || row.entity.hc != 'Y'">
+    <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ 'ui-grid-row-header-cell': col.isRowHeader }"  ui-grid-cell title="{{colRenderIndex+col}}" level_id="{{row.entity['$$treeLevel']}}"  no_color="{{row.entity.hc != 'Y'? 'Y' : ''}}">
+    </div>
+  </div>
+  <div ng-if="row.entity.da == 0 && row.entity.hc == 'Y'" class="header_right">
+    <div class="header_cell">
+      <div ng-repeat="(colRenderIndex, col) in [colContainer.renderedColumns[0]] track by col.colDef.name" class="ui-grid-cell" ng-class="{ 'ui-grid-row-header-cell': col.isRowHeader }" >
+            <div no_color="{{row.entity.hc != 'Y'?  'Y' : ''}}" level_id="{{row.entity['$$treeLevel']}}" style="padding:0px" class="ui-grid-cell-contents grid-cell-text"> 
+                    <div class="open_close" ng-repeat="d in row.entity['empty_cells']" l_id="{{$index}}"> 
+                            <div class="col-xs-12" ng-if="$index == (row.entity['empty_cells'].length - 1)">
+                                <i ng-click="grid.appScope.toggleRow(row,$event,grid);$event.stopPropagation();" ng-class="{'fa fa-minus-circle i_con': ( ( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) || ( row.treeNode.children && row.treeNode.children.length > 0 ) ) && row.treeNode.state === 'expanded', 'fa fa-plus-circle i_con': ( ( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) || ( row.treeNode.children && row.treeNode.children.length > 0 ) ) && row.treeNode.state === 'collapsed'}" ng-click="grid.appScope.toggleRow(row,$event,grid);$event.stopPropagation();"></i>
+                            </div>
+                    </div> 
+                    <div class="title_div" title="{{row.entity['empty_cells'].length*30 != 0 ?row.entity['empty_cells'].length*30 : 30}}" style="{{'height: 100%;border: 1px solid #ddd;display: inline-block; width:calc(100% - '+(row.entity['empty_cells'].length*30 != 0 ? row.entity['empty_cells'].length*30 : 0)+'px); padding:'+(row.entity['empty_cells'].length*30 != 0 ? 6 : 0)+'px;'}}"> 
+                        <div class="open_close" ng-if="(row.entity['empty_cells'].length == 0 )">
+                               <i ng-click="grid.appScope.toggleRow(row,$event,grid);$event.stopPropagation();" ng-class="{'fa fa-minus-circle i_con': ( ( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) || ( row.treeNode.children && row.treeNode.children.length > 0 ) ) && row.treeNode.state === 'expanded', 'fa fa-plus-circle i_con': ( ( grid.options.showTreeExpandNoChildren && row.treeLevel > -1 ) || ( row.treeNode.children && row.treeNode.children.length > 0 ) ) && row.treeNode.state === 'collapsed'}" ng-click="grid.appScope.toggleRow(row,$event,grid);$event.stopPropagation();"></i>
+                        </div>
+                        <div class="content_div">
+                            {{row.entity.t_l}} 
+                        </div>
+                    </div>
+            </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+ 

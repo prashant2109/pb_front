@@ -1,0 +1,11 @@
+body {background: #fff;overflow: auto;}
+#root{display: flex;min-width: 100%;min-height: 100vh;}
+#root>* {width: 100%;}
+.rb{box-shadow: rgba(67, 90, 111, 0.3) 0px 0px 1px, rgba(67, 90, 111, 0.47) 0px 2px 4px -2px;border-radius: 5px;width: 464px; flex-direction: column;-webkit-box-orient: vertical;-webkit-box-direction: normal;margin: 100px auto;padding: 32px;font-size: 14px;font-weight: 400;line-height: 22px;letter-spacing: -.05px;}
+.rc_h {text-align: center;position: relative;padding-top: 2rem;margin-bottom: 2rem;}
+.rc_hl {display: flex;align-items: center;justify-content: center;position: absolute;left: calc(50% - 50px);top: -48px;width: 100px;height: 45px;border-color: transparent #d5dee6 #d5dee6 transparent;border-style: solid;border-width: 1px;border-radius: 6px;background: #f7f8fa;color: #333;}
+.rc_t{font-weight: 500 !important;line-height: 24px;letter-spacing: -.05px;color: #1f4160;font-size: 22px;}
+.rc_fi{margin-top: 8px;margin-bottom: 24px;}
+.rc_fi label{color: rgb(66, 90, 112);font-weight: 500;}
+.rc_flb{width: 100%; margin: 0px !important;height:40px; font-size: 14px !important;border-radius: .25rem; text-transform: unset;}
+.rc_ftr{margin-top: 30px;text-align: center;font-size: 13px;font-weight: 400;line-height: 22px;letter-spacing: -.05px;color: #1f4160;}

@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+/**
+ * Description
+ * @method send_ajax_request
+ * @param {} cgi_file
+ * @param {} post_data
+ * @param {} succ_flag
+ * @param {} callback
+ * @param {} request_type
+ * @param {} asyn
+ * @return 
+ */
+
+var window_selection_global='';
+function send_ajax_request(cgi_file, post_data,succ_flag,callback,request_type,asyn){
+    var xmlhttp = (window.XMLHttpRequest)?(new XMLHttpRequest()):(new ActiveXObject("Microsoft.XMLHTTP"));
+    /**
+ 	* Description
+ 	* @method onreadystatechange
+ 	* @return 
+ 	*/
+        xmlhttp.onreadystatechange=function(){
+                if(xmlhttp.readyState ==4 && xmlhttp.status==200 && succ_flag == 1) {
+                        var text        = xmlhttp.responseText;
+                        var xml         = xmlhttp.responseXML;
+                        try{var json    = JSON && JSON.parse(text) || eval(text);}catch(e){}
+                        var callfunc    = eval(callback);
+                }
+        }
+        xmlhttp.open(request_type,cgi_file,asyn);
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xmlhttp.send(post_data);
+}
+
+function load_css(){
+    var url_data    = window.location;
+    var data_str    = url_data['search'].split('?')[1].split('/');
+    var l           = data_str.length;
+    data_str[l-2]   = 'css'
+    data_str[l-1]   = data_str[l-1].split('.')[0]+'.css'
+    data_str        = data_str.join('/')
+    console.log( data_str)
+    document.querySelector('link').href    = data_str;
+}
+function load_html(xml, text){
+	document.documentElement.innerHTML	= text+'<style>table{display: table;border-collapse: separate;border-spacing:0px;border-color: grey;} table>tbody>tr>td{padding: 2px;line-height:1.42857143;border: 1px solid #ddd;} body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:12px;color:#333;margin:1px;} .sle_xml{background:#FF9800!important;border:1px solid #ff0000;color:black;font-weight:800;} .conn_sth{background: #f0ad4e!important;border: 1px solid #ff0000;z-index: 100;color: white;} .conn_mth{background: #cdb0ff!important;border: 1px solid #ff0000;z-index: 100;color: white;} .sle_xml_new{background: #17a2b8!important;border: 1px solid #ff0000;z-index: 100;color: white;} .sle_xml_conn{background: #facfd5!important;border: 1px solid #ff0000;z-index: 100;color:#333333;} .selected_td{ background:rgba(103, 58, 183, 0.24) !important;} .parent_iframe_tag{background: aqua !important;}.child_iframe_tag{background:rgba(233, 180, 11, 0.82) !important;}.ind_iframe_tag{background: #c1c1c1 !important;} .sys_iframe_tag_1, .sys_iframe_tag_5{background: #dacfef !important;}.sys_iframe_tag_2,.sys_iframe_tag_6{background: #8e9fff !important;}.sys_iframe_tag_3, .sys_iframe_tag_7{ background: #CDDC39 !important; }.sys_iframe_tag_4, .sys_iframe_tag_8{background: #FFC107 !important;} .res_iframe_tag {background: #77ff7c !important;}.green_iframe_tag {background: #78ff78 !important;}.red_iframe_tag{background: #ff978f !important;}</style>';
+}
+var xml_ids        = []
+window.onmouseup  = function(e){
+    var owm_main_dom        = document.getElementById('iframe_model');
+    var mouseup_dom         = e.target;
+    if(owm_main_dom && mouseup_dom && owm_main_dom.contains(mouseup_dom)){
+        return;
+    }
+    gl_e         = e
+    xml_ids         = []
+
+    var sl_xmlids   = getselection()
+    if(sl_xmlids.length == 0){
+            if(mouseup_dom.tagName.toLowerCase() == 'td') {
+                var tmouseup_dom = mouseup_dom.querySelector('span[id]')
+                if (tmouseup_dom)
+                    mouseup_dom = tmouseup_dom
+            }
+            var rt  = 1
+            if(mouseup_dom.tagName == 'SPAN') {
+               rt = 0
+               var t = mouseup_dom.parentElement
+               rt = 1
+               /*if(t.getAttribute('section_type') == 'HGH'){
+                }*/
+            }
+            if(mouseup_dom.getAttribute('id') && rt){
+                var t = mouseup_dom.parentElement
+                var id_xml    = mouseup_dom.getAttribute('id')
+                sl_xmlids.push(id_xml)    
+                parent.get_highlights(id_xml, t.getAttribute('section_type'), mouseup_dom.innerHTML)
+            }
+            
+    }
+    new_ids     = sl_xmlids.slice()
+    for(var t=0;t<new_ids.length;t++){
+        var dom = document.querySelector('[id="'+new_ids[t]+'"]')
+        if(dom.parentElement.classList.contains('selected_td')){
+            dom.parentElement.classList.remove('selected_td')
+        }else{ 
+            dom.parentElement.classList.add('selected_td')
+        }
+    }  
+    var sel = window.getSelection();
+}
+function getselection(){
+    var result  = []
+    var wnd = window;
+    var sel = wnd.getSelection();
+    if(!window.getSelection().toString()){
+        return result;
+    }
+    var nodes   = sel.getRangeAt(0).cloneContents().querySelectorAll("span");
+    var start_node  = sel.getRangeAt(0).startContainer.parentNode;
+    var endt_node  = sel.getRangeAt(0).startContainer.parentNode;
+    if(nodes.length ==0 && start_node.isEqualNode(endt_node)){
+        nodes   = [start_node];
+    }
+    for(var j=0;j<nodes.length;j++){
+        var rt  = 1
+        if(nodes[j].tagName == 'SPAN') {
+           rt = 0
+           var t = nodes[j].parentElement
+           rt = 1
+        }
+        if(nodes[j].getAttribute('id') && rt)
+            result.push(nodes[j].getAttribute('id'))    
+    }
+    return result;     
+}
+
+function clear_all(){
+    Array.prototype.forEach.call(document.querySelectorAll('.selected_td'),function(t){
+        t.classList.remove('selected_td')
+    })
+    Array.prototype.forEach.call(document.querySelectorAll('[color_map="Y"]'),function(t){
+        t.removeAttribute('color_map')
+        if(t.hasAttribute('org_css'))
+            t.setAttribute('style', t.getAttribute('org_css'))
+    })
+}
+var url_data 	= window.location;
+var data_str  	= url_data['search'].split('?')[1];
+document.body.innerHTML = 'Loading...'
+send_ajax_request(data_str, null, 1,"load_html(xml, text)", "GET",true);
+</script>

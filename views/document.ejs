@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TAS Data Studio</title>
+    <link rel="shortcut icon" href="src/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/ui-grid.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/ag-grid.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/mdb.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/feather.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/document.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/perfect-scrollbar.css"/>
+    <script>
+        sessionStorage['user_id'] = "<%= user_id %>";
+        sessionStorage['user_name'] = "<%= user_name %>";
+        sessionStorage['user_role'] = "<%= user_role %>";
+    </script>
+    <script type="text/javascript" src="src/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="src/libs/popper.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular.min.js"></script>
+    <script type="text/javascript" src="src/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/libs/perfect-scrollbar.jquery.js"></script>
+    <script type="text/javascript" src="src/libs/ui-grid.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="src/libs/ag-grid-community.min.js"></script>
+    <script type="text/javascript" src="src/libs/mdb.min.js" defer></script>
+    <script type="text/javascript" src="src/js/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src="src/js/common/reference_module.js"></script>
+    <script type="text/javascript" src="src/js/upload.js"></script>
+    <script type="text/javascript" src="src/js/source_setup.js"></script>
+    <script type="text/javascript" src="src/js/schedule_module.js"></script>
+    <script type="text/javascript" src="src/js/validation_module.js"></script>
+    
+    <script type="text/javascript" src="src/js/modules/information_units.js"></script>
+    <script type="text/javascript" src="src/js/modules/db_rca_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/output_viewer.js"></script>
+    <script type="text/javascript" src="src/js/modules/enterprise_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/config_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/icons_list.js"></script>
+    <script type="text/javascript" src="src/js/modules/module_info.js"></script>
+    <script type="text/javascript" src="src/js/modules/texteditor.js"></script>
+    <script type="text/javascript" src="http://172.16.20.10:1122/src/js/table_module.js"></script>
+    <script type="text/javascript" src="http://172.16.20.52:1122/src/js/runapplicator.js"></script>
+    <script type="text/javascript" src="http://172.16.20.52:1122/src/js/grid_module_copy.js"></script>
+
+    <script type="text/javascript" src="src/js/common/app.js"></script>
+    <script type="text/javascript" src="src/js/common/service.js"></script>
+    <script type="text/javascript" src="src/js/common/factory.js"></script>
+    <script type="text/javascript" src="src/js/document.js"></script>
+    <script src="src/js/menu_list.js"></script>
+
+</head>
+<body ng-app="app" ng-controller="DocumentCntrl" id="body_wrapper" style="display: none;">
+<div class="header_top">
+    <div class="container-full">
+	    <div class="pull-left logo_div">
+		    <svg width="30" height="28">
+                <rect ry="2" rx="2" height="24" width="26" x="0" y="0" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+                <rect x="7" y="6" rx="0" ry="0" width="12" height="12" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                <rect x="10" y="9" rx="0" ry="0" width="6" height="6" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+                <rect x="11.5" y="10.5" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                <rect x="3" y="6" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                <rect x="7" y="3" rx="0" ry="0" width="3" height="4" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                <rect x="20" y="15" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                <rect x="16" y="18" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+		    </svg>
+		    <span class="logo_title"><b>TAS</b> Data Studio</span>
+	    </div>
+		<div class="head_cnt"> Automation & Document Analytics Project Builder</div>
+	    <div class="pull-right">
+	    	<div class="header-icon waves-effect pull-left"><i class="fa fa-user" aria-hidden="true"></i><span class="text-dark" id="user_id"><%- user_id %></span></div>
+	    	<a href="/login" class="header-icon waves-effect pull-left"><i class="fa fa-sign-out red-text" aria-hidden="true"></i></a>
+	    </div>
+    </div>
+</div>
+<div class="cs">
+	<div class="company_data_panel" ng-if="!cmp_edit">
+		<div class="clp">
+			<div class="clp__header" ng-if="0">
+				<div class="clp__title"></div>
+			</div>
+			<div class="clp__body" style="height: 100%;">
+			    <div class="company_port">
+				<div class="add_port_cvr" ng-class="{'add_cvr_hg': !add_in_show}">
+						<div class="add_port_name_flt">
+						<input type="text" class="form-control filter_input" placeholder="Search Project" ng-model="cmp_name_filter['project_name']" style="margin:0" id="fltIn" autofocus>
+						</div>
+						<div class="add_port_name" ng-class="{'add_port_name_hg': !add_in_show}">
+							<div class="add_prjt">
+							<i class="fa" aria-hidden="true" ng-click="div_height()" title="Add New Project" ng-class="{'fa-plus-circle': add_in_show,'fa-minus-circle': !add_in_show}"></i>
+							</div>
+							<span class="add_pro_txt" ng-show="add_in_show" ng-click="div_height()">Add Project</span>
+							<input type="text" class="form-control add_prjt_input" ng-model="new_slcted_indus_dic['project_name']" id="newProject" placeholder="Project Name" ng-show="!add_in_show">
+							<input type="text" class="form-control add_prjt_input" ng-model="new_slcted_indus_dic['desc']" style="margin-left: 50px;" placeholder="Add Description" ng-show="!add_in_show">
+						</div>
+				</div>
+				<div class="c_port_cvr" ng-class="{'c_port_cvr_hg':  !add_in_show}">
+					<div class="port_con_cvr"  ng-repeat="e_data in gbl_cmp_data | filter:cmp_name_filter track by $index" ng-class="{'active':e_data['project_name'] == slcted_indus_dic['project_name']}"  ng-click="slt_cmp(e_data)">
+						<div class="port_logo"><i class="fa fa-ravelry" aria-hidden="true"></i></div>
+						<div class="port_name">
+							<div style="width:calc(100% - 50px);float:left;" class="ellipsis" title="{{e_data['project_name']}}">{{e_data['project_name']}}</div> 
+							<div style="float:left;" class="badge badge-info ml-2">{{e_data['info'].length}}</div>
+						</div>
+						<div class="ext_dtl">
+							<div class="sub_details">
+								<i class="ng-binding" title="{{e_data['desc']}}">{{e_data['desc']}}</i>
+							</div>
+						</div>
+					</div>
+				</div>
+			    </div>
+			    <div class="company_data">
+				<div class="add_tr_filter">
+					 <div class="cmp_data_slct" ng-if="!add_in_show" style="height: 29px;">
+                                                <div class="demo_check cmp_ck" ng-class="{'active': ch_op_cm_all}" ng-click="checked_option_comp_all()"></div>
+                                        </div>
+					<div class="form-inline dis_inline_block" style="wdth_reduce: !add_in_show">
+						<label for="company" >Company : </label>
+						<input type="text" class="form-control filter_input" placeholder="Search Company" style="width: calc(100% - 70px);margin: 0px;" ng-model="cmp_inp_filter['company_name']" >
+					</div>
+				</div>
+				<div class="cmp_data_vw">
+				    <div class="cmp_data_cvr_box" ng-repeat="e_data in slcted_indus_dic['info'] | filter: cmp_inp_filter track by $index">
+					<div class="cmp_data_slct" ng-if="!add_in_show">
+						<div class="demo_check cmp_ck" ng-class="{'active': e_data['flg']}" ng-click="checked_option_comp(e_data)"></div>
+					</div>
+					<div class="cmp_data_cvr"  ng-click="cmp_details(e_data)" ng-class="{'active':e_data['company_name'] == cmp_details_view['company_name'], wdth_reduce: !add_in_show}">
+						<div class="cmp_top_con">
+							<div class="cmp_top_logo">
+								<img src="src/images/comp_dummy.png" class=" img-responsive" style="width: 100%;height: 100%;user-select: none;"/>
+							</div>
+							<div class="cmp_top_data_cvr">
+								<div class="cmp_top_data_name">{{e_data['company_name']}}</div>
+								<div class="cmp_top_data_date">{{e_data['reporting']}}</div>
+							</div>
+						</div>
+						<div class="cmp_bot_con">
+							<div class="cmp_bot_data_cvr">
+								<div class="cmp_bot_data_tindus">{{e_data['company_type']}}</div>
+								<div class="cmp_process_sts">
+									<div ng-class='{pending: ($index % 2) == 1 ,complete:($index%2) != 1}'>
+									</div>
+								</div>
+								<div class="cmp_top_data_tempname" title="Deal id">{{e_data['dealid']}}</div>
+							</div>
+							<div class="cmp_bot_mdata_cvr">
+								<div class="cmp_bot_data_ff">{{e_data['ticker']}}</div>
+								<div class="cmp_top_data_mid" title="Filing Frequency">{{e_data['filing_frequency']}}</div>
+								<div class="cmp_top_data_tid" title="Latest period" >{{e_data['latest_period']}}</div>
+							</div>
+						</div>
+					</div>
+				    </div>
+					</div>
+			      </div>
+			</div>
+		</div>	
+
+
+	    <div class="company_details">
+		<div class="ts_box_menu app-sidebar">
+    			<div class="app-sidebar__inner">
+        			<ul class="vertical-nav-menu metismenu">
+            				<li class="app-sidebar__heading">Project Builder Menu 
+						<div class="material-switch  float-right" style="margin-top: 2px;">
+                         				<input id="switch" type="checkbox" ng-model="editorOption" ng-checked="editorOption">
+                            				<label for="switch" class="switch_act" title="Editor/Update Builder Config"></label>
+                        			</div>
+						<% if (user_role == "admin") { %>
+							<span class="fa fa-cogs pull-right stting" ng-show="!editorOption && add_in_show" ng-click="cmp_edit_option()"></span>
+						<% } %>
+						<span class="btn btns pull-right" ng-click="add_new_save()" ng-show="editorOption" title="Save Project Builder Config">Save</span>
+					</li>
+                			<li class="mm-active" ng-repeat="(idx,menu) in side_menu_list track by $index" style="clear:both" ng-if="menu_sec_show_func(menu) || editorOption">
+					<div class="d-inline pull-left ch_new_cnt">
+						<div class="demo_check" ng-class="{'active': menu_showing[menu['k']] == 'Y'}" ng-click="checked_option(menu)" ng-show="editorOption"></div>
+					</div>
+                    			<a href="#" aria-expanded="true" ng-click="side_menu_click_func(menu, menu['k'])" ng-class="{'active': side_menu_slcted_flg == menu['k'],'opc_n': (menu_showing[menu['k']] == 'N' && !editorOption), 'opc_n_e': editorOption}" title="{{menu['n']}}">
+                        		<i class="fa {{menu['fa_icon']}} metismenu-icon" aria-hidden="true"></i>
+                                    	{{menu['n']}}
+                    			</a>
+                    				<ul class="mm-collapse mm-show" ng-class="{'chbxadded': editorOption == true}" ng-if="menu['submenu'].length">
+							<ng-include src="'modules_template.html'" ng-repeat="(inx, smenu) in menu['submenu'] track by $index" ng-if="menu_sec_show_func(smenu) || editorOption" class="module_temp">
+                    				</ul>
+                			</li>
+        			</ul>
+    			</div>
+		</div>
+	    </div>
+	</div>
+	<!-- Config Module-->
+	<div class="config_sectiop" ng-if="cmp_edit">
+		<cmp-config config="configuration"></cmp-config>
+	</div>	
+</div>
+	<script type="text/ng-template" id="modules_template.html">
+		<li m_id="{{menu['k']}}">
+			<div class="d-inline pull-left ch_new_cnt" style="padding-top: 4px;">
+				<div class="demo_check" ng-class="{'active': menu_showing[smenu['k']] == 'Y'}" ng-click="checked_option(smenu, menu)" ng-show="editorOption"></div>
+			</div>
+			<a href="#" ng-click="side_menu_click_func(smenu, menu['k'])" ng-class="{'mm-active': side_menu_slcted_flg == smenu['k'], 'opc_n_e': editorOption,'opc_n': (menu_showing[smenu['k']] == 'N' && !editorOption)}" title="{{smenu['n']}}">
+			<i class="fa {{smenu['fa_icon']}} metismenu-icon" aria-hidden="true"></i>
+			{{smenu['n']}}	
+			</a>
+			<ul class="mm-collapse mm-show" ng-class="{'chbxadded': editorOption == true}"  ng-if="smenu['submenu'].length" >
+				<ng-include src="'modules_template.html'" ng-repeat="(inx, ssmenu) in smenu['submenu'] track by $index" ng-init="smenu=ssmenu" ng-if="menu_sec_show_func(ssmenu) || editorOption" class="module_temp">
+			</ul>
+		</li>
+	</script>
+
+	<% include common_views %>
+
+</body>
+</html>

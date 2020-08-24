@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TAS Data Studio</title>
+    <link rel="shortcut icon" href="src/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/ui-grid.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/ag-grid.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/mdb.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/monitor.css"/>    
+    <link rel="stylesheet" type="text/css" href="src/css/feather.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/fullcalendar.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/pmd-datetimepicker.css"/>
+
+    <script type="text/javascript" src="src/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="src/libs/popper.min.js"></script>
+    <script type="text/javascript" src="src/libs/moment.min.js"></script>
+    <script type="text/javascript" src="src/libs/bootstrap-datetimepicker.js"></script >
+    <script type="text/javascript" src="src/libs/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="src/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/libs/ui-grid.min.js"></script>
+    <script type="text/javascript" src="src/libs/ag-grid-community.min.js"></script>
+    <script type="text/javascript" src="src/libs/mdb.min.js" defer></script>
+    <script type="text/javascript" src="src/libs/highcharts.js" defer></script>
+    <script type="text/javascript" src="src/libs/highcharts-more.js" defer></script>
+    <script type="text/javascript" src='src/libs/ui-bootstrap-tpls.js'></script>
+    <script type="text/javascript" src="src/js/angular-drag-and-drop-lists.min.js"></script>
+    <script type="text/javascript" src='src/libs/gojs_lib_main.js'></script>
+    <script type="text/javascript" src='src/libs/new_view.js'></script>
+    <script type="text/javascript" src='http://172.16.20.52:1122/src/libs/utils.js'></script>
+
+    <script type="text/javascript" src="src/js/common/reference_module.js"></script>
+    <script type="text/javascript" src="src/js/upload.js"></script>
+    <script type="text/javascript" src="src/js/source_setup.js"></script>
+    <script type="text/javascript" src="src/js/schedule_module.js"></script>
+    <script type="text/javascript" src="src/js/validation_module.js"></script>
+
+    <script type="text/javascript" src="src/js/modules/information_units.js"></script>
+    <script type="text/javascript" src="src/js/modules/db_rca_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/output_viewer.js"></script>
+    <script type="text/javascript" src="src/js/modules/enterprise_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/config_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/icons_list.js"></script>
+    <script type="text/javascript" src="src/js/modules/module_info.js"></script>
+    <script type="text/javascript" src="src/js/modules/texteditor.js"></script>
+    <!--script type="text/javascript" src="http://172.16.20.52:1122/src/js/runapplicator.js"></script-->
+    <script type="text/javascript" src="src/js/modules/runapplicator.js"></script>
+    <script type="text/javascript" src="http://172.16.20.10:1122/src/js/table_module.js"></script>
+    <script type="text/javascript" src="src/js/modules/grid_module_copy.js"></script>
+    
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="src/js/common/app.js"></script>
+    <script type="text/javascript" src="src/js/common/service.js"></script>
+    <script type="text/javascript" src="src/js/common/factory.js"></script>
+    <script type="text/javascript" src="src/js/common/filter.js"></script>
+    <script type="text/javascript" src="src/js/menu_list.js"></script>
+    <script type="text/javascript" src="src/js/monitor.js"></script>
+
+</head>
+<body ng-app="app" ng-controller="MonitorCntrl" id="body_wrapper" style="display: none;">
+<div class="header_top">
+    <div class="container-full">
+	    <div class="pull-left logo_div" ng-class="{'closed-sidebarr': !side_menu_active}">
+		    <svg width="30" height="28">
+                	<rect ry="2" rx="2" height="24" width="26" x="0" y="0" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+                	<rect x="7" y="6" rx="0" ry="0" width="12" height="12" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="10" y="9" rx="0" ry="0" width="6" height="6" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+                	<rect x="11.5" y="10.5" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="3" y="6" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="7" y="3" rx="0" ry="0" width="3" height="4" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="20" y="15" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+                	<rect x="16" y="18" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+		    </svg>
+		    <span class="logo_title"><b>TAS</b> Data Studio</span>
+	    </div>	   
+	    <div class="pull-left hamburger_full_box">
+                    <div class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar" ng-click="side_menu_func()"> <!--ng-class="{'is-active': !side_menu_active}"-->
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </div>
+            </div>
+	    <div class="hdr_title_sec">
+			{{side_menu_slcted_name_func(side_menu_slcted_flg)}}
+	    </div>
+	    <div class="pull-right">
+		<div class="dropdown pull-left">
+            	<div class="header-icon waves-effect pull-left dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-building" aria-hidden="true"></i><span class="text-dark" style="text-transform: initial;">{{slcted_indus_dic['project_name']}}</span></div>
+            	<div class="dropdown-menu dropdown-menu-tas">
+			<div class="md-form md-form-tas" style="margin: 5px 23px;" ng-if="0">
+                        	<input class="form-control" type="text" placeholder="Search" aria-label="Search" ng-model="filterIndusVal" ng-keyup="enter($event)" style="font-size: 14px;" autofocus>
+			 </div>
+			<div class="dropdown-item-tas-full">
+	                	<div class="dropdown-item-tas waves-effect" ng-repeat="ind in industry_type_list" ng-click="slct_indus_func(ind, 0)" ng-class="{'drp_active': slcted_indus_dic['project_id'] == ind['project_id']}" title="{{ind['project_name']}}">{{ind['project_name']}}</div>
+			</div>
+            	</div>
+	    </div>
+	    <div class="dropdown pull-left">
+	    <div class="header-icon waves-effect pull-left dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file" aria-hidden="true"></i><span class="text-dark">{{slcted_comp_dic['company_name']}}</span></div>
+	    <div class="dropdown-menu dropdown-menu-tas">
+		<div class="md-form md-form-tas" style="margin: 5px 23px;">
+			<input class="form-control" type="text" placeholder="Search" aria-label="Search" ng-model="filterRow_comp" ng-keyup="enter($event)" ng-change="filterRowFunc()" style="font-size: 14px;" autofocus>
+		</div>
+		<div class="dropdown-item-tas-full">
+			<div class="dropdown-item-tas waves-effect" ng-repeat="comp in comp_data | filter: filterRow_comp" ng-click="comp_click_func(comp)" ng-class="{'drp_active': slcted_comp_dic['company_id'] == comp['company_id']}" title="{{comp['company_name']}}">{{comp['company_name']}}</div>
+		</div>
+	    </div>
+            </div>
+		    <div class="header-icon waves-effect pull-left" ng-click="show_alert_func()">
+			<i class="fa fa-bell" aria-hidden="true" ng-class="{'icon-anim-pulse': show_alert_flg}"></i>
+			<div class="notify" ng-if="show_alert_flg">
+			    <span class="heartbit"></span>
+			    <span class="point"></span>
+			</div>
+		    </div>
+	    	<div class="header-icon waves-effect pull-left"><i class="fa fa-user" aria-hidden="true"></i><span class="text-dark" id="user_id"><%- user_id %></span></div>
+	    	<a href="/document" class="header-icon waves-effect pull-left"><i class="fa fa-home" aria-hidden="true"></i></a>
+	    	<div class="header-icon waves-effect pull-left" ng-click="logout_func()"><i class="fa fa-sign-out red-text" aria-hidden="true"></i></div>
+	    </div>
+    </div>
+</div>
+<div class="ts_box" ng-class="{'closed-sidebar': !side_menu_active}">
+	<tas-upload config="upload_scope" ng-show="side_menu_slcted_flg['k'] == 'crawling_monitoring'"></tas-upload>
+	<tas-source  config="source_scope" ng-show="side_menu_slcted_flg['k'] == 'crawling_monitoring'"></tas-source>
+
+	<div class="ts_box_menu app-sidebar">
+		<div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu metismenu">
+                            <li class="app-sidebar__heading">Project Builder Menu</li>
+			    <li class="mm-active" ng-repeat="menu in side_menu_list" ng-if="menu_sec_show_func(menu)">
+                                <a href="#" aria-expanded="true" ng-click="side_menu_click_func(menu, menu['k'])" ng-class="{'active': side_menu_slcted_flg['k'] == menu['k'] || (side_mmenu_k == menu['k'] && !side_menu_active), 'mtr_disable_btn': menu_showing[menu['k']] == 'N'}" title="{{menu['n']}}" key="{{menu['k']}}">
+				    <i class="fa {{menu['fa_icon']}} metismenu-icon" aria-hidden="true"></i>
+                                    {{menu['n']}}
+                                </a>
+				<ul class="mm-collapse mm-show" style="" ng-if="menu['submenu'].length">
+                                    <!--li ng-repeat="smenu in menu['submenu']" ng-if="smenu['k'] && (menu_showing[smenu['k']] == 'Y' || (menu_showing[smenu['k']] == 'N' && smenu['submenu'].length))"-->
+                                    <li ng-repeat="smenu in menu['submenu']" ng-if="menu_sec_show_func(smenu)">
+                                        <a href="#" ng-click="side_menu_click_func(smenu, menu['k'])" ng-class="{'mm-active': side_menu_slcted_flg['k'] == smenu['k'], 'mtr_disable_btn': menu_showing[smenu['k']] == 'N'}" title="{{smenu['n']}}" key="{{smenu['k']}}">
+                                            <i class="metismenu-icon">
+                                            </i>{{smenu['n']}}
+                                        </a>
+					<ul class="mm-collapse mm-show" style="" ng-if="smenu['submenu'].length">
+					    <li ng-repeat="ssmenu in smenu['submenu']" ng-if="ssmenu['k'] && (menu_showing[ssmenu['k']] == 'Y')">
+						<a href="#" ng-click="side_menu_click_func(ssmenu, menu['k'])" ng-class="{'mm-active': side_menu_slcted_flg['k'] == ssmenu['k'], 'mtr_disable_btn': false}" title="{{ssmenu['n']}}" key="{{ssmenu['k']}}">
+						    <i class="metismenu-icon">
+						    </i>{{ssmenu['n']}}
+						</a>
+
+					    </li>
+					</ul>
+                                    </li>
+				</ul>
+                            </li>
+                        </ul>
+		</div>
+	</div>
+
+	<div class="noti_pop" ng-if="show_alert_pop_flg">
+		<div class="noti_pop_bg" ng-click="cls_show_alert_func()"></div>
+		<div class="noti_pop_cnt" ng-class="{'open': show_alert_pop_flg}">
+			<div class="no_noti_txt" ng-if="!doc_updated_list.length">No new notifications</div>
+			<div class="noti_pop_cnt_fl"  ng-if="doc_updated_list.length">
+	                        <div class="no_noti_txt" style="font-weight: normal;">Notifications</div>
+				<div class="no_noti_p">
+					<div class="no_noti_pt" ng-repeat="doc in doc_updated_list" ng-click="status_chck_change_func(doc)">
+                                                <span class="no_noti_crc" ng-class="{noti_read: doc['read']}"></span>
+                                                <div class="no_noti_pt_p">{{doc['indus']['project_name']}}</div>
+                                                <div class="no_noti_pt_c">{{doc['comp']['company_name']}}</div>
+                                                <div class="no_noti_pt_tx">Doc id <span class="no_noti_pt_t_doc badge badge-warning">{{doc['doc_id']}}</span> updated <span ng-if="doc['status']=='E'" style="font-weight: bold;color: red;margin-left: 20px;">(ERROR)</span> <span ng-if="doc['status']=='Y'" style="font-weight: bold;color: #4CAF50; margin-left: 20px;">(SUCCESS)</span></div>
+                                        </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<div class="mtr_main" ng-class="{'closed-sidebar': !side_menu_active}">
+	<div ng-if="side_menu_slcted_flg['k'] == 'pre_taxo'" class="mtr_main__sb_sec">
+		<iframe id="pre_taxo_id" src=""></iframe>
+	</div>
+	<div ng-if="side_menu_slcted_flg['k'] == 'ocr'" class="mtr_main__sb_sec">
+                <iframe id="slt_frame_id" src=""></iframe>
+        </div>
+	<div ng-if="side_menu_slcted_flg['k'] == 'taxonomy_link' || side_menu_slcted_flg['k'] == 'search'  || side_menu_slcted_flg['k'] == 'focused_extrc' || side_menu_slcted_flg['k'] == 'model_mapping_rca' || side_menu_slcted_flg['k'] == 'edit_op_temp'" class="mtr_main__sb_sec">
+                <iframe id="slt_frame_id" src=""></iframe>
+        </div>
+	<div class="mtr_main__sb_sec mtr_card" ng-if="side_menu_slcted_flg['k'] == 'data_models'">
+		<div class="mtr_card__header">
+			<div class="mtr_card__title">{{side_menu_slcted_name_func(side_menu_slcted_flg)}}</div>
+		</div>
+		<div class="mtr_card__body" style="height: calc(100% - 35px);">
+			<enterprise-data config="enterprise"></enterprise-data>
+		</div>
+	</div>
+	<div class="mtr_main__sb_sec" ng-if="side_menu_slcted_flg['k'] == 'data_builder_rca' || side_menu_slcted_flg['k'] == 'review_output'">
+		<builder-rca config="buider_rca" class="module_div"></builder-rca>	
+	</div>
+	<div ng-if="doc_view_enable" class="mtr_main__sb_sec">
+		<div class="mtr_main__sb_sec_tabs">
+			<div class="rca_divide">
+				<div class="mtr_main__sb_sec_doc">Doc Id: <b>{{slcetd_doc_view_dic['d']}}</b></div>	
+				<div class="mtr_main__sb_sec_doc rca_adjust">Doc Name: <b>{{slcetd_doc_view_dic['doc_name']}}</b></div>	
+			</div>
+			<div class="rca_divide_docs">
+				<div class="dropdown pull-right" style="height: 30px;">
+					<div class="header-icon waves-effect pull-left dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:34px;line-height:35px;">
+						<div class="header_icon_txt_hdr">
+							<i class="fa fa-building" aria-hidden="true"></i><span class="text-dark" style="text-transform: initial;" title="{{slcted_rca_dic['t']['d']+' - '+slcted_rca_dic['t']['doc_name']}}">{{slcted_rca_dic['t']['d']+' - '+slcted_rca_dic['t']['doc_name']}}</span>
+						</div>
+					</div>
+					<div class="dropdown-menu dropdown-menu-tas" style="width: 100%;">
+						<div class="dropdown-item-tas-full">
+							<div class="dropdown-item-tas waves-effect" ng-repeat="doc in gridOptionsDoc['data']" ng-click="change_rca_docs(doc)" title="{{doc['d']+' - '+doc['doc_name']}}">{{doc['d']+' - '+doc['doc_name']}}</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+                </div>
+                <div class="" ng-if="side_menu_slcted_flg['k'] == 'slt'" style="height: calc(100% - 30px);float: left;width: 100%;">
+                     <textapplicator config="modeltraining" class="apt"></textapplicator>
+                </div>
+		<iframe id="slt_frame_id" src=""  ng-if="(side_menu_slcted_flg['k'] == 'output' && slcted_indus_dic['project_id'] == '60')"  class="mtr_main__sb_sec_frame"></iframe> 
+		<ref-div config="refOptions" ng-if="side_menu_slcted_flg['k'] == 'toc'" class="mtr_main__sb_sec_frame"> </ref-div> 
+		<div ng-if="side_menu_slcted_flg['k'] == 'exha_data' || side_menu_slcted_flg['k'] == 'text_to_table' || side_menu_slcted_flg['k'] ==  'all_tables' || side_menu_slcted_flg['k'] ==  'foot_notes' || side_menu_slcted_flg['k'] ==  'sen_table_desc' || side_menu_slcted_flg['k'] ==  'sen_addit' || side_menu_slcted_flg['k'] ==  'other_txt_t_tble' || side_menu_slcted_flg['k'] == 'table_analys'" class="exha_data_contents">
+                      <informations-units config="information_scope"></informations-units>
+                </div>
+		<div ng-if="side_menu_slcted_flg['k'] == 'output' && slcted_indus_dic['project_id'] != 'FE' && slcted_indus_dic['project_id'] != '60'" class="mtr_main__sb_sec_frame">
+			<!--tas-output-view config="outputviewOptions" class="module_div"></tas-output-view-->
+			<runapplicator config="modeltraining_1" class="apt"></runapplicator>
+		</div>
+	</div>
+	
+	<div ng-if="side_menu_slcted_flg['k'] == 'output' && slcted_indus_dic['project_id'] == 'FE'" class="mtr_main__sb_sec">
+		 <div class="mtr_main__sb_sec_tabs">
+			<div class="mtr_main__sb_sec_tab waves-effect" ng-class="{'active': output_sclted_sub_menu == 'op_view'}" ng-click="output_sclted_sub_click_func('op_view')">Comparative View</div>
+			<div class="mtr_main__sb_sec_tab waves-effect" ng-class="{'active': output_sclted_sub_menu == 'analyt'}" ng-click="output_sclted_sub_click_func('analyt')">Analytics</div>
+		 </div>
+		 <iframe id="slt_frame_id" src="" class="mtr_main__sb_sec_frame"></iframe>
+		 <!--div ng-if="output_sclted_sub_menu == 'op_view'">
+			 <iframe id="slt_frame_id" src="" class="mtr_main__sb_sec_frame"></iframe>
+		</div>
+		<div ng-if="output_sclted_sub_menu == 'analyt'">
+			<validated-data config="validated_data" class="vali_body"></validated-data>
+		</div-->
+	</div>
+	<div ng-if="!doc_view_enable && side_menu_slcted_flg['doc_view'] && (side_menu_slcted_flg['k'] != 'output' ||  slcted_indus_dic['project_id'] != 'FE') && side_menu_slcted_flg['k'] != 'crawling_monitoring'" class="mtr_main__sb_sec mtr_card">
+		<div class="mtr_card__header">
+                	<div class="mtr_card__title">Documents</div>
+			<div class="dropdown pull-right" style="width: auto;">
+                        	<div class="waves-effect main_tab_btn waves-effect pull-left main_tab_sub_btn" ng-click="show_comp_view()" data-toggle="tooltip" title="" style="line-height: 35px;height: 35px;font-size: 14px;" ng-class="{active: cmp_comp_flg}" data-original-title="Compare"><i class="fa fa-balance-scale" aria-hidden="true"></i>
+                        	</div>
+                	</div>
+			<span class="pull-right sch_cls" ng-click="review_across()" title="Comparative View" ng-if="side_menu_slcted_flg['k'] == 'output' && slcted_indus_dic['project_id'] != '60'" style="line-height: 35px;width: 40px;text-align: center;">
+				<i class="fa fa-arrow-right" style="font-size: 14px;color: #000;"></i>
+			</span>
+		</div>
+		<div class="mtr_card__body" style="height: calc(100% - 35px);position: relative;">
+			<div class="cmp_full-div" ng-if="cmp_comp_data_flg">
+				<div class="cmp_sidenav_top">
+                			<div class="comp_sec_build_icon"><i class="fa fa-building-o" aria-hidden="true"></i></div>
+                			<input class="form-control cmpy_comp_srch_fld ng-pristine ng-untouched ng-valid ng-empty" type="text" placeholder="Search" aria-label="Search" ng-model="filterComCmpyRow['company_name']" ng-keyup="enter($event)" ng-change="filterComCmpyRowFunc()" style="font-size: 13px;">
+           			 </div>
+				<div class="cmp_sidenav_btm">
+					<div class="comp_grp_div" ng-repeat="cn in comp_data | filter:filterComCmpyRow track by $index">
+						<div class="comp_grp_lft_sec">
+							<div class="comp_grp_lft_sec_logo">
+							    <img src="src/images/comp_dummy.png" width=""> 
+							</div>
+                    				</div>
+						<div class="comp_grp_rgt_sec">
+							<div class="comp_grp_lft_sec_title">{{cn['company_name']}}</div>
+							<div class="comp_grp_lft_sec_sub">
+							    <div class="comp_grp_lft_sec_sub_innr"> - </div>
+							    <div class="comp_grp_lft_sec_sub_innr"> - </div>
+							    <div class="comp_grp_lft_sec_sub_innr" style="color: #106714;">
+								<span>-</span>
+							    </div>
+                        				</div>
+							<div class="add_comp_for_cmp d-inline">
+							    <div class="checkbox checkbox-info checkbox-fill">
+								<input type="checkbox" ng-click="add_comp_for_cmp_func(cn)" id="checkbox-i-infill_{{$index}}" ng-checked="cn['active'] == 'Y'">
+								<label for="checkbox-i-infill_{{$index}}" class="cr"></label> 
+							    </div>
+                        				</div> 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ui-grid="gridOptionsDoc" class="grid_div grid_div_doc" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns ></div>	
+		</div>
+	</div>
+
+	<div class="mtr_main__sb_sec mtr_card" ng-if="side_menu_slcted_flg['k'] == 'output_conf'">
+		<div style="height: 100%;width: 100%;">
+			<div class="cst">
+				Workflow/Process Automation Templates
+			</div>
+			<div class="csb">
+				<div class="csb_box">
+					<div class="csb_img_bbox">
+						<img src="src/images/grid_screen.png" alt="Grid Module" class="img-responsive">
+					</div>
+					<div class="csb_binfo">
+						<div class="clearfix">
+							<h2>OCR - Data Redaction</h2>
+							<div class="csb_side_txt"></div>
+						</div>
+						<div class="csb_buttons">
+							<div class="csb_button btn-indigo waves-effect"><i class="fa fa-cogs"></i> Config</div>
+						</div>
+					</div>
+				</div>
+				<div class="csb_box">
+					<div class="csb_img_bbox">
+						<img src="src/images/slt_screen.png" alt="Grid Module" class="img-responsive">
+					</div>
+					<div class="csb_binfo">
+						<div class="clearfix">
+							<h2>Data Vetting</h2>
+							<div class="csb_side_txt"></div>
+						</div>
+						<div class="csb_buttons">
+							<div class="csb_button btn-indigo waves-effect"><i class="fa fa-cogs"></i> Config</div>
+						</div>
+					</div>
+				</div>
+				<div class="csb_box">
+					<div class="csb_img_bbox">
+						<img src="src/images/grid_view.PNG" alt="Grid Module" class="img-responsive">
+					</div>
+					<div class="csb_binfo">
+						<div class="clearfix">
+							<h2>Extract, Transform and Compare</h2>
+							<div class="csb_side_txt"></div>
+						</div>
+						<div class="csb_buttons">
+							<div class="csb_button btn-indigo waves-effect"><i class="fa fa-cogs"></i> Config</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>		
+	</div>
+
+	<div class="mtr_main__inner" ng-if="side_menu_slcted_flg['k'] == 'crawling_monitoring' && !popup && !scheduler">
+		<div class="row mtr_main__inner_row">
+			<div class="col-sm-12 col-md-7 col-xl-8">
+				<div class="mtr_card mtr_mb_10">
+                                    <div class="mtr_card__header">
+                                        <div class="mtr_card__title">Stats</div>
+					<div class="dropdown pull-right">
+						<div class="header-icon waves-effect pull-left dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:34px;line-height:35px;">
+							<i class="fa fa-building" aria-hidden="true"></i><span class="text-dark" style="text-transform: initial;">{{slcted_yrs_dic['n']}}</span>
+						</div>
+						<div class="dropdown-menu dropdown-menu-tas" style="width: 95px;min-width: 50px;">
+							<div class="dropdown-item-tas-full">
+								<div class="dropdown-item-tas waves-effect" ng-repeat="yrs in monitor_res_dic['ysts']" ng-click="slct_yrs_func(yrs)">{{yrs['n']}}</div>
+							</div>
+						</div>
+					</div>
+                                    </div>
+                                    <div class="mtr_card__body">
+					<div id="year_wise_chart_id" style="min-width: 310px; height: 350px; margin: 0 auto; width:100%;"></div>	
+                                    </div>
+                                </div>
+			</div>
+			<div class="col-sm-12 col-md-5 col-xl-4">
+				<div class="mtr_card mtr_mb_20">
+                                    <div class="mtr_card__header">
+                                        <div class="mtr_card__sub_title">Recent Update</div>
+                                    </div>
+                                    <div class="mtr_card__body">
+                                         <div class="mtr_card__doc_left_inner" style="height: 350px;">
+                                                <ul class="mtr_card__list_group">
+                                                    <li class="mtr_card__list_group_item" style="padding: 10px 10px 10px 10px;" ng-repeat="rcn in monitor_res_dic['recent']">
+                                                        <div class="mtr_card__widget_content">
+                                                                <div class="mtr_card__widget_sn">
+                                                                       {{$index+1}}
+                                                                </div>
+                                                                <div class="mtr_card__widget_desc" style="width: calc(100% - 125px);">
+                                                                    <div class="mtr_card__widget_heading" title="{{rcn['n']}}"><a href="{{rcn['link']}}" target="_blank">{{rcn['n']}}</a></div>
+                                                                    <div class="mtr_card__widget_subheading" style="opacity:1;"><i class="badge" style="background: #3F51B5 !important;">{{rcn['sd']}}</i></div>
+                                                                </div>
+								<div class="mtr_card__widget_rgt">
+									<div class="mtr_card__widget_rgt_cnt text-info">{{rcn['count']}}</div>
+									<div class="mtr_card__widget_rgt_arw" ng-if="0"><i class="fa fa-long-arrow-up text-success" aria-hidden="true"></i></div>
+								</div>
+                                                        </div>
+                                                    </li>
+						</ul>
+					</div>
+                                    </div>
+                                </div>
+			</div>	
+		</div>
+
+		<div class="row mtr_main__inner_row">
+                        <div class="col-sm-12">
+                                <div class="mtr_card mtr_mb_20">
+                                    <div class="mtr_card__header">
+                                        <div class="mtr_card__title">Source Details</div>
+                                    </div>
+                                    <div class="mtr_card__body">
+					<div class="mtr_card__doc_left">
+						<div class="mtr_card__doc_left_inner">
+                                                <ul class="mtr_card__list_group">
+                                                    <li class="mtr_card__list_group_item waves-effect" ng-repeat="data in monitor_res_dic['data']" ng-click="slct_data_func(data)" ng-class="{active: [slcted_data_dic['sn'], slcted_data_dic['uid']].join('_') == [data['sn'], data['uid']].join('_')}">
+                                                        <div class="mtr_card__indicator bg-{{data['s']}}"></div>
+                                                        <div class="mtr_card__widget_content">
+                                                                <div class="mtr_card__widget_sn">
+									{{data['sn']}}
+                                                                </div>
+                                                                <div class="mtr_card__widget_desc">
+                                                                    <div class="mtr_card__widget_heading">{{data['n']}}
+                                                                        <div class="badge badge-info ml-2">{{Object.keys(data['uinfo']).length}}</div>
+									<div class="edc pull-right"><i class="fa fa-superpowers" aria-hidden="true" ng-click="mypop(data,'')" ng-class="{'trained': data.tsts == 'Y','untrained': data.tsts == 'G'}" title="Training" ></i></div>
+									<div class="edc pull-right" style="margin-right: 7px;" ><i class="fa fa fa-calendar-check-o" ng-click="schedule_pop(data,'')" title="Scheduler" ng-class="{'s-trained': data.tsts == 'Y','s-untrained': data.tsts == 'G'}"></i></div>
+									<div class="edc pull-right del_over" ng-click="delete_url(data)">
+                                                                                <i class="fa fa-trash-o"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mtr_card__widget_subheading"><a href=""><i class="pr-2 exLnk_icon" ng-class="{'feather icon-link':Object.keys(data['uinfo']).length > 100,'fa fa-tags':Object.keys(data['uinfo']).length < 100}"></i></a><span>{{data['info']}}</span></div>
+									
+                                                                </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+					</div>
+					<div class="mtr_card__doc_right">
+						<div class="mtr_card__doc_right_top">
+							<div class="mtr_card__doc_right_top_b">
+								<div class="mtr_card__doc_right_txt">Process</div>
+								<div class="mtr_card__doc_right_cnt">{{slcted_data_dic['stats']['pending_c']}}</div>
+								<div class="mtr_card__doc_right_bar">
+									<div class="widget-progress-wrapper">
+										<div class="progress-bar-sm progress-bar-animated-alt progress">
+											<div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{slcted_data_dic['stats']['pending_p']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{slcted_data_dic['stats']['pending_p']}}%;"></div>
+										</div>
+										<div class="mtr_card__doc_lbl">
+											<div class="pull-left">Total</div>
+                                                                                        <div class="pull-right">{{gridOptions.data.length}}</div>
+										</div>
+									</div>
+							    	</div>
+							</div>
+							<div class="mtr_card__doc_right_top_b">
+								<div class="mtr_card__doc_right_txt">Success</div>
+                                                                <div class="mtr_card__doc_right_cnt">{{slcted_data_dic['stats']['processed_c']}}</div>
+                                                                <div class="mtr_card__doc_right_bar">
+									<div class="widget-progress-wrapper">
+										<div class="progress-bar-sm progress-bar-animated-alt progress">
+											<div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{slcted_data_dic['stats']['processed_p']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{slcted_data_dic['stats']['processed_p']}}%;"></div>
+										</div>
+										<div class="mtr_card__doc_lbl">
+											<div class="pull-left">Total</div>
+                                                                                        <div class="pull-right">{{gridOptions.data.length}}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="mtr_card__doc_right_top_b">
+								<div class="mtr_card__doc_right_txt">Rejected</div>
+                                                                <div class="mtr_card__doc_right_cnt">{{slcted_data_dic['stats']['rejected_c']}}</div>
+                                                                <div class="mtr_card__doc_right_bar">
+                                                                        <div class="widget-progress-wrapper">
+                                                                                <div class="progress-bar-sm progress-bar-animated-alt progress">
+                                                                                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{slcted_data_dic['stats']['rejected_p']}}" aria-valuemin="0" aria-valuemax="100" style="width: {{slcted_data_dic['stats']['rejected_p']}}%;"></div>
+                                                                                </div>
+                                                                                <div class="mtr_card__doc_lbl">
+                                                                                        <div class="pull-left">Total</div>
+                                                                                        <div class="pull-right">{{gridOptions.data.length}}</div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+							</div>
+						</div>
+						<div class="mtr_card__doc_right_btm">
+							<div class="grid_div grid_div_doc" ui-grid="gridOptions" ui-grid-pinning ui-grid-resize-columns></div>	
+						</div>
+					</div>
+                                    </div>
+                                </div>
+                        </div>
+		</div>
+	</div>
+	<!-------- PopUp -------->
+	<div class="mtr_main__sb_sec my_pop" ng-show="popup && side_menu_slcted_flg['k'] == 'crawling_monitoring'">
+			<div class="mtr_main__sb_sec_tabs">
+				<div class="rca_divide">
+					<div class="mtr_main__sb_sec_doc" style="border-right: 1px solid #ddd;">
+						Project Id : <b> {{slcted_comp_dic['monitor_id']}}</b>
+					</div>
+					<div class="mtr_main__sb_sec_doc rca_adjust" style="max-width:calc(100% - 101px)">
+						Url : <b>{{slct_ind_link['link']}}</b>
+					</div>
+				</div>
+				<div class="rca_divide_docs">
+					<div class="pull-right h-100" ng-click="mypop('','close')" style="padding:7px 10px; border-left: 1px solid #ddd;">
+						<i class="fa fa-reply" style="font-size: 14px;color: #000;"></i>
+					</div>
+				</div>
+					
+			</div>	
+			<iframe src=""  class="mtr_main__sb_sec_frame" id="pop_iframe"></iframe>
+	</div>
+	<!-------- Schedular PopUp -------->
+	<div class="mtr_main__sb_sec my_pop" ng-show="scheduler && side_menu_slcted_flg['k'] == 'crawling_monitoring'">
+		<div class="sch_head">
+			<span class="sch_title">Scheduler</span>
+			<span class="ellipsis url_sch">Url : <b style="color: #444444;">{{slct_ind_link['link']}}</b></span>
+			<span class="pull-right sch_cls" ng-click="schedule_pop('','close')">
+				<i class="fa fa-reply" style="font-size: 14px;color: #000;"></i>
+			</span>
+		</div>
+		<schedule config="schedule_scope"></schedule>
+	</div>
+	<!-- Progress Bar-->
+	<div class="prog_bar" ng-show="ips">
+		<div class="spinner">
+		  <div class="rect1"></div>
+		  <div class="rect2"></div>
+		  <div class="rect3"></div>
+		  <div class="rect4"></div>
+		  <div class="rect5"></div>
+		</div>
+	</div>
+</div>
+</div>
+
+ <% include common_views %>
+
+</body>
+</html>

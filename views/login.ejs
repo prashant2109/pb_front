@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TAS Data Studio</title>
+    <link rel="shortcut icon" href="src/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="src/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="src/css/ui-grid.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/mdb.min.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/login.css"/>
+
+    <script type="text/javascript" src="src/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="src/libs/popper.min.js"></script>
+    <script type="text/javascript" src="src/libs/angular.min.js"></script>
+    <script type="text/javascript" src="src/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/libs/ui-grid.min.js"></script>
+    <script type="text/javascript" src="src/libs/mdb.min.js" defer></script>
+</head>
+<body>
+<div id="root">
+	<div>
+		<div class="rb">
+			<div class="rc_h">
+				<div class="rc_hl">
+					<svg width="30" height="28" style="margin-left: 4px;margin-top: 4px;">
+						<rect ry="2" rx="2" height="24" width="26" x="0" y="0" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+						<rect x="7" y="6" rx="0" ry="0" width="12" height="12" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+						<rect x="10" y="9" rx="0" ry="0" width="6" height="6" style="fill:#FFAC47;stroke:black;stroke-width:0"></rect>
+						<rect x="11.5" y="10.5" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+						<rect x="3" y="6" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+						<rect x="7" y="3" rx="0" ry="0" width="3" height="4" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+						<rect x="20" y="15" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+						<rect x="16" y="18" rx="0" ry="0" width="3" height="3" style="fill:#fff;stroke:black;stroke-width:0"></rect>
+					</svg>
+					<span><b>TAS</b></span>
+				</div>
+				<h1 class="rc_t">Log in to Data Studio</h1>
+			</div>
+			<div>
+				<form method="post" action="/login" role="form" autocomplete="off">
+				    <div class="rc_fi">
+					  <label for="FormName">Name*</label>
+					  <input type="text" id="FormName" class="form-control" name="username" required autofocus>
+				    </div>
+				    <div class="rc_fi">
+					<label for="FormPassword">Password*</label>
+					<input type="password" id="FormPassword" class="form-control" name="password" required autofocus>
+				    </div>
+				    <div class="mt-4 text-right">
+					<button class="btn btn-main btn-rounded btn-sm waves-effect rc_flb" type="submit">Log in</button>
+				    </div>
+				</form>
+				
+				<div class="rc_ftr">Copyright © 2020 TAS All Rights Reserved</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
